@@ -22,13 +22,10 @@ sap.ui.define([
                 this.getView().bindElement({
                     path: sPath,
                     events: {
-                        dataReceived: function () {
-                          //  this.getOwnerComponent().getModel().refresh();
+                        dataReceived: function () {                          
                         }.bind(this)
                     }
-                });
-                
-                //this.getView().byId("itemsT").refreshAggregation("items");
+                });                
             }
         });
     });
