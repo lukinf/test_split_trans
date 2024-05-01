@@ -66,20 +66,17 @@ sap.ui.define([
                                 }
                             }.bind(this)
                         });
-                    };                    
+                    };
                 }.bind(this));
             },
 
             onItemsTableUpdateFinished: function (oEvent) {
-                // var oList = oEvent.getSource();
-                // var oItems = oList.getItems();
-                // for (var i = 0; i < oItems.length; i++) {
-                //     var oItem = oItems[i];
-                //     var oDeleteControl = oItem.getDeleteControl();
-                //     oDeleteControl.setIcon("sap-icon://delete");
-                //     oDeleteControl.setType(sap.m.ButtonType.Reject);
-                //     oDeleteControl.setTooltip("Delete");
-                // }
+                oEvent.getSource().getItems().forEach(function (oItem) {
+                    let oDeleteControl = oItem.getDeleteControl();
+                    oDeleteControl.setIcon("sap-icon://delete");
+                    oDeleteControl.setType(sap.m.ButtonType.Reject);
+                    oDeleteControl.setTooltip("Delete");
+                });
             }
         });
     });
