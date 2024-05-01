@@ -26,11 +26,17 @@ sap.ui.define([
             },
 
             onAddItemPress: function (oEvent) {
+                if (sap.ushell.Container) {
+                    sap.ushell.Container.setDirtyFlag(true);
+                }
                 this._oItemContext = this._oItemsBinding.create({ Id: "0", Active: true }, true);
                 this._renumberingItems();
             },
 
             onDeleteItemPress: function (oEvent) {
+                if (sap.ushell.Container) {
+                    sap.ushell.Container.setDirtyFlag(true);
+                }
                 let oListItemContext = oEvent.getParameter('listItem').getBindingContext();
                 oListItemContext.delete();
                 this._renumberingItems();
@@ -55,9 +61,12 @@ sap.ui.define([
                         this._oModel.submitChanges({
                             success: function () {
                                 MessageToast.show("Data Saved...");
+                                if (sap.ushell.Container) {
+                                    sap.ushell.Container.setDirtyFlag(true);
+                                }
                             }.bind(this)
                         });
-                    };
+                    };                    
                 }.bind(this));
             },
 
