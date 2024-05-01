@@ -1,0 +1,18 @@
+<mvc:View controllerName="cz.fridl.lukas.test_split_trans.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">        
+        <List id="headers" items="{ path: '/HeaderSet', sorter: [{ path: 'Id' }]}" mode="SingleSelectMaster" selectionChange="onSelectionChange" updateFinished="onHeadersListUpdateFinished">
+            <items>
+                <StandardListItem title="{Id}" description="{Name}" type="Active" press="onSelectionChange"/>
+            </items>
+        </List>
+        <footer>
+            <OverflowToolbar id="footerOT" visible="true">                
+                <ToolbarSpacer id="ToolbarSpacer"/>
+                <Button id="editB" press="onEditPress" text="Edit" type="Accept" tooltip="Edit" icon="sap-icon://write-new-document"/>
+                <Button id="createB" press="onCreatePress" text="New" type="Emphasized" tooltip="New" icon="sap-icon://add-document"/>                
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

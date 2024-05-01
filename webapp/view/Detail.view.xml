@@ -1,0 +1,25 @@
+<mvc:View controllerName="cz.fridl.lukas.test_split_trans.controller.Detail"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m">
+	<Page id="page" title="{i18n>title}">
+		<content>
+			<ObjectHeader title="Item Detail" number="{Id}">
+				<ObjectAttribute text="{Name}" />
+			</ObjectHeader>
+			<Table id="itemsT" fixedLayout="false" items="{HDR_TO_ITM}" sticky="HeaderToolbar,ColumnHeaders">
+				<columns>
+					<Column id="idC">
+						<Label id="idL" text="Id" labelFor="idT"/>
+					</Column>
+					<Column id="nameC">
+						<Label id="nameL" text="Name" labelFor="nameT"/>
+					</Column>
+				</columns>
+				<ColumnListItem id="itemCLI">
+					<Text id="idT" text="{Id}"/>
+					<Text id="nameT" text="{Name}"/>					
+				</ColumnListItem>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

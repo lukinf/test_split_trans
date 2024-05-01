@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+        <Schema Namespace="TEST"
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+            <EntityType Name="Header">
+                <Key>
+                    <PropertyRef Name="Id" />
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false" />
+                <Property Name="Name" Type="Edm.String" Nullable="true" />
+                <NavigationProperty Name="HDR_TO_ITM" Relationship="TEST.HDR_ITM" FromRole="FromRole_HDR_ITM" ToRole="ToRole_HDR_ITM"/>
+            </EntityType>
+            <EntityType Name="Item">
+                <Key>
+                    <PropertyRef Name="HdrId" />
+                    <PropertyRef Name="Id" />
+                </Key>
+                <Property Name="HdrId" Type="Edm.Int32" Nullable="false" />
+                <Property Name="Id" Type="Edm.Int32" Nullable="false" />
+                <Property Name="Name" Type="Edm.String" Nullable="true" />
+            </EntityType>
+            <Association Name="HDR_ITM">
+                <End Type="TEST.Header" Multiplicity="1" Role="FromRole_HDR_ITM"/>
+                <End Type="TEST.Item" Multiplicity="*" Role="ToRole_HDR_ITM"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_HDR_ITM">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_HDR_ITM">
+                        <PropertyRef Name="HdrId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="TEST" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="HeaderSet" EntityType="TEST.Header" />
+                <EntitySet Name="ItemSet" EntityType="TEST.Item" />
+                <AssociationSet Name="HDR_ITM_SET" Association="TEST.HDR_ITM">
+                    <End EntitySet="HeaderSet" Role="FromRole_HDR_ITM"/>
+                    <End EntitySet="ItemSet" Role="ToRole_HDR_ITM"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,170 @@
+{
+  "_version": "1.49.0",
+  "sap.app": {
+    "id": "cz.fridl.lukas.test_split_trans",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.11.1",
+      "toolsId": "fe98e063-a548-4b01-a261-ba9ba3cc021b"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "http://npl:8000/sap/opu/odata/sap/ZLF_TEST_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "http://127.0.0.1:5500/test_split_trans/webapp/localService/metadata.xml",
+          "annotations": []
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.123.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "cz.fridl.lukas.test_split_trans.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "headers": {
+            "X-Requested-With": "X"
+          },
+          "useBatch": true,
+          "tokenHandling": false,
+          "defaultCountMode": "None",
+          "defaultBindingMode": "TwoWay",
+          "defaultOperationMode": "Server",
+          "defaultUpdateMethod": "PUT"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "rootView": {
+      "viewName": "cz.fridl.lukas.test_split_trans.view.App",
+      "type": "XML",
+      "id": "App"
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewPath": "cz.fridl.lukas.test_split_trans.view",
+        "controlId": "rootControl",
+        "viewType": "XML",
+        "transition": "slide",
+        "homeRoute": "home",
+        "async": true,
+        "bypassed": {
+          "target": "notFound"
+        }
+      },
+      "routes": [
+        {
+          "name": "master",
+          "pattern": "",
+          "target": [
+            "master"
+          ]
+        },
+        {
+          "name": "detail",
+          "pattern": "Detail/:HeaderKey:",
+          "target": [
+            "master",
+            "detail"
+          ]
+        },
+        {
+          "name": "create",
+          "pattern": "create",
+          "target": [
+            "master",
+            "create"
+          ]
+        },
+        {
+          "name": "edit",
+          "pattern": "Edit/:HeaderKey:",
+          "target": [
+            "master",
+            "edit"
+          ]
+        }
+      ],
+      "targets": {
+        "master": {
+          "viewName": "Master",
+          "controlAggregation": "masterPages",
+          "viewLevel": 0
+        },
+        "detail": {
+          "viewName": "Detail",
+          "controlAggregation": "detailPages",
+          "viewLevel": 1
+        },
+        "create": {
+          "viewName": "Create",
+          "controlAggregation": "detailPages",
+          "viewLevel": 2
+        },
+        "edit": {
+          "viewName": "Edit",
+          "controlAggregation": "detailPages",
+          "viewLevel": 3
+        }
+      }
+    }
+  }
+}

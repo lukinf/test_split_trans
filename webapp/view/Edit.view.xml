@@ -1,0 +1,43 @@
+<mvc:View controllerName="cz.fridl.lukas.test_split_trans.controller.Edit" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <ObjectHeader title="Item Edit" number="{Id}">                
+            </ObjectHeader>
+            <f:SimpleForm id="headerF" editable="true" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2" emptySpanL="5" emptySpanM="3" columnsL="2" columnsM="2">
+                <f:content>
+                    <Input id="nameHI" value="{Name}"/>
+                </f:content>
+            </f:SimpleForm>
+            <Table id="itemsT" fixedLayout="false" items="{HDR_TO_ITM}" sticky="HeaderToolbar,ColumnHeaders" mode="Delete" updateFinished="onItemsTableUpdateFinished" delete="onDeleteItemPress">
+                <headerToolbar>
+                    <OverflowToolbar id="headerOT">
+                        <Title id="ItemsTT" text="Items"/>
+                        <ToolbarSpacer id="itemsTableTS"/>
+                        <Button id="newItemB" type="Emphasized" text="Add Item" tooltip="Add Item" icon="sap-icon://add-document" press="onAddItemPress"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="idC">
+						<Label id="idL" text="Id" labelFor="idT"/>
+					</Column>
+                    <Column id="nameC">
+                        <Label id="nameL" text="Name" labelFor="nameI"/>
+                    </Column>
+                </columns>
+                <ColumnListItem id="itemCLI" press="onListItemPress" visible="{Active}">
+                    <Text id="idT" text="{Id}"/>
+                    <Input id="nameI" value="{Name}" enabled="{Active}"/>
+                </ColumnListItem>
+            </Table>
+        </content>
+        <footer>
+            <OverflowToolbar id="footerOT" visible="true">
+                <ToolbarSpacer id="footerTS"/>
+                <Button id="saveB" press="onSavePress" text="Save" type="Emphasized" tooltip="Save" icon="sap-icon://save"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

@@ -1,0 +1,22 @@
+[
+    {
+        "Id": 1,
+        "Name": "Toronto Tech Meet-Up"
+    },
+    {
+        "Id": 2,
+        "Name": "Los Angeles redditors"        
+    },
+    {
+        "Id": 3,
+        "Name": "San Francisco UI5 Lovers"
+    },
+    {
+        "Id": 4,
+        "Name": "Designers + Geeks New York"        
+    },
+    {
+        "Id": 5,
+        "Name": "New York City Geek Adventure Group"        
+    }
+]
