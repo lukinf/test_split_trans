@@ -28,11 +28,13 @@ sap.ui.define([
             },
 
             onAddItemPress: function (oEvent) {
+                if (sap.ushell.Container) { sap.ushell.Container.setDirtyFlag(true); }
                 this._oItemContext = this._oItemsBinding.create({ Active: true }, true, { inactive: true });
                 this._renumberingItems();
             },
 
             onDeleteItemPress: function (oEvent) {
+                if (sap.ushell.Container) { sap.ushell.Container.setDirtyFlag(true); }
                 let oItem = oEvent.getParameter('listItem');
                 let oItemContext = oItem.getBindingContext();
                 this._setActiveStatus(oItem, false);
@@ -61,6 +63,7 @@ sap.ui.define([
             onSavePress: function (oEvent) {
                 this._oModel.submitChanges({
                     success: function () {
+                        if (sap.ushell.Container) { sap.ushell.Container.setDirtyFlag(false); }
                         MessageToast.show("Data Saved...");
                         this._oModel.refresh(true);
                     }.bind(this)
