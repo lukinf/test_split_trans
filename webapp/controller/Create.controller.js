@@ -17,7 +17,7 @@ sap.ui.define([
             },
 
             _onRouteMatched: function (oEvent) {
-                this._oModel = this.getOwnerComponent().getModel();
+                this._oModel = this.getBackendModel();
                 this._oHeaderContext = this._oModel.createEntry("/HeaderSet");
                 this.getView().setBindingContext(this._oHeaderContext);
                 this._oItemsTable = this.byId("itemsT");
@@ -28,26 +28,14 @@ sap.ui.define([
             onAddItemPress: function (oEvent) {
                 if (sap.ushell.Container) { sap.ushell.Container.setDirtyFlag(true); }
                 this._oItemContext = this._oItemsBinding.create({ Id: "0", Active: true }, true);
-                this._renumberingItems();
+                this.renumberingItems(this._oItemsTable);
             },
 
             onDeleteItemPress: function (oEvent) {
                 if (sap.ushell.Container) { sap.ushell.Container.setDirtyFlag(true); }
                 let oListItemContext = oEvent.getParameter('listItem').getBindingContext();
                 oListItemContext.delete();
-                this._renumberingItems();
-            },
-
-            _renumberingItems: function () {
-                let iItmNo = 10;
-                let aItems = this._oItemsTable.getItems();
-                aItems.forEach(function (oItem) {
-                    if (oItem.getBindingContext().getObject().Active === true) {
-                        let sPath = oItem.getBindingContext().getPath();
-                        this._oModel.setProperty(sPath + "/Id", iItmNo.toString(), oItem.getBindingContext());
-                        iItmNo = iItmNo + 10;
-                    }
-                }.bind(this));
+                this.renumberingItems(this._oItemsTable);
             },
 
             onSavePress: function (oEvent) {

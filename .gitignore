@@ -11,5 +11,8 @@ archive.zip
 webapp/resources/
 webapp/test/
 webapp/dist/
+controls
+.gitignore
+
 
 

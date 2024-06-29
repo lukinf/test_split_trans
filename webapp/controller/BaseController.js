@@ -43,6 +43,18 @@ sap.ui.define([
             _oMessagePopover.toggle(oEvent.getSource());
         },
 
+        renumberingItems: function (oItemsTable) {
+            let iItmNo = 10;
+            let aItems = oItemsTable.getItems();
+            aItems.forEach(function (oItem) {
+                if (oItem.getBindingContext().getObject().Active === true) {
+                    let sPath = oItem.getBindingContext().getPath();
+                    this._oModel.setProperty(sPath + "/Id", iItmNo.toString(), oItem.getBindingContext());
+                    iItmNo = iItmNo + 10;
+                }
+            }.bind(this));
+        },
+
         _getMessgeItemTemplate() {
             let oMessage = new sap.m.MessageItem({
                 type: "{message>type}",

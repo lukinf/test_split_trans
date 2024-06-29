@@ -14,27 +14,35 @@
                     </smartform:GroupElement>
                 </smartform:Group>
             </smartform:SmartForm>
-            <Table id="itemsT" fixedLayout="false" items="{HDR_TO_ITM}" sticky="HeaderToolbar,ColumnHeaders" mode="Delete" updateFinished="onItemsTableUpdateFinished" delete="onDeleteItemPress">
-                <headerToolbar>
-                    <OverflowToolbar id="headerOT">
-                        <Title id="ItemsTT" text="Items"/>
-                        <ToolbarSpacer id="itemsTableTS"/>
-                        <Button id="newItemB" type="Emphasized" text="Add Item" tooltip="Add Item" icon="sap-icon://add-document" press="onAddItemPress"/>
-                    </OverflowToolbar>
-                </headerToolbar>
-                <columns>
-                    <Column id="idC">
-                        <Label id="idL" text="Id" labelFor="idT"/>
-                    </Column>
-                    <Column id="nameC">
-                        <Label id="nameL" text="Name" labelFor="nameI"/>
-                    </Column>
-                </columns>
-                <ColumnListItem id="itemCLI" press="onListItemPress">
-                    <Text id="idT" text="{Id}"/>
-                    <Input id="nameI" value="{Name}"/>
-                </ColumnListItem>
-            </Table>
+            <IconTabBar id="tablesITB" expanded="true" select="handleIconPressed">
+                <items>
+                    <IconTabFilter id="itemsITF" key="1" icon="sap-icon://activity-items" tooltip="Items">
+                        <Table id="itemsT" fixedLayout="false" items="{HDR_TO_ITM}" sticky="HeaderToolbar,ColumnHeaders" mode="Delete" updateFinished="onItemsTableUpdateFinished" delete="onDeleteItemPress">
+                            <headerToolbar>
+                                <OverflowToolbar id="headerOT">
+                                    <Title id="ItemsTT" text="Items"/>
+                                    <ToolbarSpacer id="itemsTableTS"/>
+                                    <Button id="newItemB" type="Emphasized" text="Add Item" tooltip="Add Item" icon="sap-icon://add-document" press="onAddItemPress"/>
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column id="idC">
+                                    <Label id="idL" text="Id" labelFor="idT"/>
+                                </Column>
+                                <Column id="nameC">
+                                    <Label id="nameL" text="Name" labelFor="nameI"/>
+                                </Column>
+                            </columns>
+                            <ColumnListItem id="itemCLI" press="onListItemPress">
+                                <Text id="idT" text="{Id}"/>
+                                <Input id="nameI" value="{Name}"/>
+                            </ColumnListItem>
+                        </Table>
+                    </IconTabFilter>
+                    <IconTabFilter id="filesITF" key="2" icon="sap-icon://attachment" count="{AttachmentsCount}" tooltip="Attachments">
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
         </content>
         <footer>
             <OverflowToolbar id="footerOT" visible="true">

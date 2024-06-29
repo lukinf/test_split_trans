@@ -1,17 +1,17 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "cz/fridl/lukas/test_split_trans/controller/BaseController",    
     "sap/m/MessageToast"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageToast) {
+    function (BaseController, MessageToast) {
         "use strict";
 
-        return Controller.extend("cz.fridl.lukas.test_split_trans.controller.Edit", {
+        return BaseController.extend("cz.fridl.lukas.test_split_trans.controller.Edit", {
 
             onInit: function () {
-                this._oModel = this.getOwnerComponent().getModel();
+                this._oModel = this.getBackendModel();
                 this._oItemsTable = this.byId("itemsT");
                 this.getOwnerComponent().getRouter().getRoute("edit").attachPatternMatched(this._onRouteMatched, this, { inactive: true });
             },
@@ -30,7 +30,7 @@ sap.ui.define([
             onAddItemPress: function (oEvent) {
                 if (sap.ushell.Container) { sap.ushell.Container.setDirtyFlag(true); }
                 this._oItemContext = this._oItemsBinding.create({ Active: true }, true, { inactive: true });
-                this._renumberingItems();
+                this.renumberingItems(this._oItemsTable);
             },
 
             onDeleteItemPress: function (oEvent) {
@@ -38,7 +38,7 @@ sap.ui.define([
                 let oItem = oEvent.getParameter('listItem');
                 let oItemContext = oItem.getBindingContext();
                 this._setActiveStatus(oItem, false);
-                this._renumberingItems();
+                this.renumberingItems(this._oItemsTable);
                 oItemContext.delete();
             },
 
@@ -46,18 +46,6 @@ sap.ui.define([
                 let oItemContext = oItem.getBindingContext();
                 let sPath = oItemContext.getPath();
                 this._oModel.setProperty(sPath + "/Active", bActive);
-            },
-
-            _renumberingItems: function () {
-                let iItmNo = 10;
-                let aItems = this._oItemsTable.getItems();
-                aItems.forEach(function (oItem) {
-                    if (oItem.getBindingContext().getObject().Active === true) {
-                        let sPath = oItem.getBindingContext().getPath();
-                        this._oModel.setProperty(sPath + "/Id", iItmNo.toString());
-                        iItmNo = iItmNo + 10;
-                    }
-                }.bind(this));
             },
 
             onSavePress: function (oEvent) {
