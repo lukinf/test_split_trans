@@ -23,10 +23,6 @@ sap.ui.define([
             return this.getOwnerComponent().getModel();
         },
 
-        // getAppModel: function () {
-        //     return this.getOwnerComponent().getModel("app");
-        // },
-
         getI18nModel: function () {
             return this.getOwnerComponent().getModel("i18n").getResourceBundle();;
         },
@@ -86,6 +82,10 @@ sap.ui.define([
 				}
 			});
 			return oMessageSeverity;
-		}
+		},
+
+        // getAppModel: function () {
+        //     return this.getOwnerComponent().getModel("app");
+        // },
     })
 })

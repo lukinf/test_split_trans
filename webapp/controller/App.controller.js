@@ -8,7 +8,6 @@ sap.ui.define(
     return BaseController.extend("cz.fridl.lukas.test_split_trans.controller.App", {
 
       onInit() {
-        
       }      
     });
   }
